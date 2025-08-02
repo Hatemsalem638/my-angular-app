@@ -1,0 +1,9 @@
+<div class="categories-container">
+  <h2 class="categories-title">Main Categories</h2>
+  <div class="categories-list">
+    <div class="category-circle" *ngFor="let category of categories">
+      <img [src]="category.image" [alt]="category.name" class="brand-logo">
+      <span class="brand-name">{{ category.name }}</span>
+    </div>
+  </div>
+</div>

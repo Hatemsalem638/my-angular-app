@@ -1,0 +1,21 @@
+<nav class="navbar">
+  <div class="navbar-left">
+    <img src="assets/logo.jpg" alt="App Logo" class="logo">
+    <div class="nav-links">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+      <a routerLink="/products" routerLinkActive="active">Products</a>
+      <a routerLink="/offers" routerLinkActive="active">Offers</a>
+    </div>
+  </div>
+  <div class="navbar-right">
+    <div class="search-container">
+      <input type="text" placeholder="Search...">
+    </div>
+    <div class="nav-actions">
+      <a href="#" class="language-selector">EN</a>
+      <a href="#" class="cart-icon">🛒</a>
+      <a href="#" class="login-btn">Login</a>
+      <button class="order-btn">Order Now</button>
+    </div>
+  </div>
+</nav>
