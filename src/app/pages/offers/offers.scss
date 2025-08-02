@@ -1,0 +1,143 @@
+.offers-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.offer-box {
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 15px;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+
+  .product-image {
+    width: 240px; 
+    height: 240px;
+    object-fit: contain;
+    margin-bottom: 10px;
+  }
+
+  .product-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: baseline;
+    gap: 10px;
+
+    .offer-title {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #333;
+    }
+
+    .offer-price {
+      color: #e53935;
+      font-weight: 700;
+      font-size: 1.2rem;
+      white-space: nowrap;
+    }
+  }
+
+  .package-options {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    justify-content: space-between;
+
+    button {
+      flex: 1;
+      padding: 8px 4px;
+      border: 1px solid #ddd;
+      background: #f5f5f5;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      min-width: 0; 
+
+      &.selected {
+        background: red;
+        color: white;
+        border-color: red;
+      }
+
+      &:hover:not(.selected) {
+        background: #e0e0e0;
+      }
+    }
+  }
+
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 5px 0;
+
+    button {
+      width: 35px;
+      height: 35px;
+      border: 1px solid #ddd;
+      background: #f5f5f5;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        background: #e0e0e0;
+      }
+    }
+
+    span {
+      min-width: 30px;
+      text-align: center;
+      font-weight: 600;
+    }
+  }
+
+  .offer-action {
+    background: red;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background 0.2s;
+
+    &:hover {
+      background: red;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .offers-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .offer-box {
+    .product-image {
+      width: 120px;
+      height: 120px;
+    }
+    
+    .package-options {
+      flex-wrap: wrap;
+      
+      button {
+        min-width: calc(33% - 6px);
+      }
+    }
+  }
+}

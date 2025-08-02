@@ -1,1 +1,28 @@
-<p>offers works!</p>
+<div class="offers-container">
+  <div class="offer-box" *ngFor="let offer of offers">
+    <img [src]="offer.image" [alt]="offer.title" class="product-image">
+    
+    <div class="product-info">
+      <span class="offer-title">{{offer.title}}</span>
+      <span class="offer-price">{{offer.price}}</span>
+    </div>
+
+    <div class="package-options">
+      <button *ngFor="let option of offer.packageOptions"
+              [class.selected]="offer.selectedPackage === option"
+              (click)="offer.selectedPackage = option">
+        {{option}}
+      </button>
+    </div>
+
+    <div class="quantity-controls">
+      <button (click)="updateQuantity(offer, -1)">-</button>
+      <span>{{offer.quantity}}</span>
+      <button (click)="updateQuantity(offer, 1)">+</button>
+    </div>
+    
+    <button class="offer-action" (click)="addToCart(offer)">
+      Add to Cart
+    </button>
+  </div>
+</div>
