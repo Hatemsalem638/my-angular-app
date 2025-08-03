@@ -1,0 +1,15 @@
+<div class="dual-offers-banner">
+  <section class="offer-banner" (click)="navigateToOffer(currentOffers[0].link)">
+    <img [src]="currentOffers[0]?.src" 
+         [alt]="currentOffers[0]?.alt"
+         class="offer-image"
+         *ngIf="currentOffers[0]">
+  </section>
+
+  <section class="offer-banner" (click)="navigateToOffer(currentOffers[1].link)">
+    <img [src]="currentOffers[1]?.src" 
+         [alt]="currentOffers[1]?.alt"
+         class="offer-image"
+         *ngIf="currentOffers[1]">
+  </section>
+</div>

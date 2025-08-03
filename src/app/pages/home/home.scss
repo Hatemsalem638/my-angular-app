@@ -1,0 +1,334 @@
+
+/* Featured offers section */
+.featured-offers-container {
+  width: 100%;
+  padding: 4rem 0; /* More vertical padding */
+  margin: 3rem 0; /* Space between sections */
+  background: #fafafa; /* Very light background */
+
+  h2 {
+    text-align: center;
+    margin-bottom: 3rem; /* More space below heading */
+    font-size: 2.2rem; /* Larger heading */
+    color: #222;
+    position: relative;
+    padding-bottom: 1rem;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 3px;
+      background: red;
+      margin: 1.5rem auto 0;
+    }
+  }
+}
+
+/* Offers container - 4 columns */
+.offers-container {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(240px, 1fr));
+  justify-content: center;
+  gap: 30px; /* Increased gap between boxes */
+  width: 100%;
+  max-width: 1400px; /* Wider container */
+  padding: 0 30px; /* More side padding */
+  margin: 0 auto;
+}
+
+/* Offer box - Enhanced styling */
+.offer-box {
+  border: 1px solid #eee;
+  border-radius: 12px; /* More rounded corners */
+  padding: 25px 20px; /* More padding */
+  background: white;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* More space between elements */
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    border-color: #ddd;
+  }
+
+  .product-image {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  .product-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center; /* Center vertically */
+    gap: 15px;
+
+    .offer-title {
+      font-weight: 700; /* Bolder */
+      font-size: 1.25rem; /* Slightly larger */
+      color: #222;
+      flex: 1;
+    }
+
+    .offer-price {
+      color: #e53935;
+      font-weight: 800; /* Bolder */
+      font-size: 1.3rem; /* Slightly larger */
+      white-space: nowrap;
+    }
+  }
+
+  .package-options {
+    display: flex;
+    gap: 10px; /* More space between buttons */
+    width: 100%;
+    justify-content: space-between;
+
+    button {
+      flex: 1;
+      padding: 10px 5px; /* Taller buttons */
+      border: 1px solid #ddd;
+      background: #f9f9f9;
+      border-radius: 6px; /* More rounded */
+      cursor: pointer;
+      font-size: 0.9rem; /* Slightly larger text */
+      transition: all 0.2s ease;
+      min-width: 0;
+
+      &.selected {
+        background: red;
+        color: white;
+        border-color: red;
+        font-weight: 600;
+      }
+
+      &:hover:not(.selected) {
+        background: #eee;
+      }
+    }
+  }
+
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* More space */
+    margin: 10px 0; /* More vertical space */
+
+    button {
+      width: 40px; /* Larger buttons */
+      height: 40px;
+      border: 1px solid #ddd;
+      background: #f9f9f9;
+      border-radius: 50%;
+      font-size: 1.2rem; /* Larger text */
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: #eee;
+        transform: scale(1.1);
+      }
+    }
+
+    span {
+      min-width: 30px;
+      text-align: center;
+      font-weight: 700; /* Bolder */
+      font-size: 1.1rem; /* Larger */
+    }
+  }
+
+  .offer-action {
+    background: red;
+    color: white;
+    border: none;
+    padding: 14px; /* Taller button */
+    border-radius: 6px; /* More rounded */
+    width: 100%;
+    cursor: pointer;
+    font-weight: 700; /* Bolder */
+    font-size: 1.1rem; /* Larger */
+    transition: all 0.3s ease;
+    margin-top: 10px; /* Space above button */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    &:hover {
+      background: darkred;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+  }
+}
+
+
+/* Responsive styles */
+@media (max-width: 1400px) {
+  .offers-container {
+    grid-template-columns: repeat(3, minmax(240px, 1fr)); /* 3 columns */
+    max-width: 1200px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .offers-container {
+    gap: 25px; /* Slightly smaller gap */
+  }
+  
+  .offer-box {
+    padding: 20px 15px;
+    
+    .product-image {
+      width: 180px;
+      height: 180px;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .offers-container {
+    grid-template-columns: repeat(2, minmax(240px, 1fr)); /* 2 columns */
+    max-width: 800px;
+  }
+  
+  .main-banner {
+    height: 450px;
+    
+    h1 {
+      font-size: 2.2rem;
+    }
+  }
+  
+  .featured-offers-container,
+  .categories-container {
+    padding: 3rem 0;
+    
+    h2 {
+      font-size: 2rem;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .offers-container {
+    grid-template-columns: minmax(280px, 1fr); /* 1 column */
+    max-width: 500px;
+    gap: 20px;
+  }
+  
+  .main-banner {
+    height: 400px;
+    padding: 0 1rem;
+    
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+  }
+  
+  .offer-box {
+    .product-image {
+      width: 160px;
+      height: 160px;
+    }
+    
+    .package-options {
+      flex-wrap: wrap;
+      
+      button {
+        min-width: calc(33% - 6px);
+      }
+    }
+  }
+  
+  .video-banner {
+    height: 400px;
+    margin: 3rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-banner {
+    height: 350px;
+    
+    h1 {
+      font-size: 1.8rem;
+    }
+    
+    .order-btn {
+      padding: 12px 24px;
+    }
+  }
+  
+  .offer-box {
+    .product-image {
+      width: 140px;
+      height: 140px;
+    }
+  }
+  
+  .categories-list {
+    gap: 20px;
+    
+    .category-circle {
+      width: 100px;
+      
+      .brand-logo {
+        width: 80px;
+        height: 80px;
+      }
+    }
+  }
+}
+
+.more-offers-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 3rem;
+  padding: 12px 24px;
+  background: white;
+  color: red;
+  border: 2px solid red;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  
+  svg {
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    background: red;
+    color: white;
+    
+    svg {
+      transform: translateX(3px);
+    }
+  }
+}

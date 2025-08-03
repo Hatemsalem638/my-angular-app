@@ -2,4 +2,45 @@
 <app-categories></app-categories>
 <app-video-banner></app-video-banner>
 
+<div class="featured-offers-container">
+  <h2>Today's Special Offers</h2>
+  <div class="offers-container">
+    <div class="offer-box" *ngFor="let offer of featuredOffers">
+      <img [src]="offer.image" [alt]="offer.title" class="product-image">
+      
+      <div class="product-info">
+        <span class="offer-title">{{offer.title}}</span>
+        <span class="offer-price">{{offer.price}}</span>
+      </div>
 
+      <div class="package-options">
+        <button *ngFor="let option of offer.packageOptions"
+                [class.selected]="offer.selectedPackage === option"
+                (click)="offer.selectedPackage = option">
+          {{option}}
+        </button>
+      </div>
+
+      <div class="quantity-controls">
+        <button (click)="updateQuantity(offer, -1)">-</button>
+        <span>{{offer.quantity}}</span>
+        <button (click)="updateQuantity(offer, 1)">+</button>
+      </div>
+      
+      <button class="offer-action" (click)="addToCart(offer)">
+        Add to Cart
+      </button>
+    </div>
+    <div class="more-offers-wrapper">
+    <a routerLink="/offers" class="more-offers-btn">
+      View All Offers
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </div>
+  </div>
+</div>
+
+
+<app-offers-banner></app-offers-banner>

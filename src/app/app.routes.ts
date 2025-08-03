@@ -7,17 +7,17 @@ export const routes: Routes = [
   { 
     path: '', 
     component: HomeComponent,
-    title: 'Home - Beverage Store'
+    title: 'Home'
   },
   { 
     path: 'products', 
     component: ProductsComponent,
-    title: 'Our Products' 
+    title: 'Products' 
   },
   { 
     path: 'offers', 
     component: OffersComponent,
     title: 'Special Offers' 
   },
-  { path: '**', redirectTo: '' } // 404 handling
+  { path: '**', redirectTo: '' } 
 ];
