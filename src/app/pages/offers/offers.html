@@ -8,21 +8,34 @@
     </div>
 
     <div class="package-options">
-      <button *ngFor="let option of offer.packageOptions"
-              [class.selected]="offer.selectedPackage === option"
-              (click)="offer.selectedPackage = option">
+      <button *ngFor="let option of ['6 cans', '12 cans', '24 cans']"
+              [class.selected]="offer.selectedPackage.startsWith(option)"
+              (click)="selectPackage(offer, option)">
         {{option}}
       </button>
     </div>
 
-    <div class="quantity-controls">
-      <button (click)="updateQuantity(offer, -1)">-</button>
-      <span>{{offer.quantity}}</span>
-      <button (click)="updateQuantity(offer, 1)">+</button>
+    <div class="package-select">
+      <select [(ngModel)]="offer.selectedPackage" class="package-dropdown">
+        <option *ngFor="let option of offer.packageOptions" [value]="option">
+          {{option}}
+        </option>
+      </select>
     </div>
-    
-    <button class="offer-action" (click)="addToCart(offer)">
-      Add to Cart
-    </button>
+
+    <div class="quantity-and-cart">
+      <div class="quantity-controls">
+        <button (click)="updateQuantity(offer, -1)">-</button>
+        <span>{{offer.quantity}}</span>
+        <button (click)="updateQuantity(offer, 1)">+</button>
+      </div>
+      
+      <button class="cart-button" (click)="addToCart(offer)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+        </svg>
+      </button>
+    </div>
   </div>
 </div>

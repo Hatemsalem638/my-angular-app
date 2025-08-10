@@ -2,15 +2,14 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-// Export the offers array and component class
 export const OFFERS = [
   {
     id: 1,
     title: '7UP Can',
     price: '500 EGP',
     image: 'assets/products/7uppack.jpg',
-    packageOptions: ['6 cans', '12 cans', '24 cans'],
-    selectedPackage: '6 cans',
+    packageOptions: ['6 cans (pack)', '12 cans (box)', '24 cans (big box)'],
+    selectedPackage: '6 cans (pack)',
     quantity: 1
   },
   {
@@ -18,8 +17,8 @@ export const OFFERS = [
     title: 'Cherry Cola Can',
     price: '500 EGP',
     image: 'assets/products/cherrycolapack.jpg',
-    packageOptions: ['6 cans', '12 cans', '24 cans'],
-    selectedPackage: '6 cans',
+    packageOptions: ['6 cans (pack)', '12 cans (box)', '24 cans (big box)'],
+    selectedPackage: '6 cans (pack)',
     quantity: 1
   },
   {
@@ -27,8 +26,8 @@ export const OFFERS = [
     title: 'Pepsi Max Can',
     price: '500 EGP',
     image: 'assets/products/pepsimaxpack.jpg',
-    packageOptions: ['6 cans', '12 cans', '24 cans'],
-    selectedPackage: '6 cans',
+    packageOptions: ['6 cans (pack)', '12 cans (box)', '24 cans (big box)'],
+    selectedPackage: '6 cans (pack)',
     quantity: 1
   },
   {
@@ -36,8 +35,8 @@ export const OFFERS = [
     title: 'Pepsi Can',
     price: '500 EGP',
     image: 'assets/products/pepsipack.jpg',
-    packageOptions: ['6 cans', '12 cans', '24 cans'],
-    selectedPackage: '6 cans',
+    packageOptions: ['6 cans (pack)', '12 cans (box)', '24 cans (big box)'],
+    selectedPackage: '6 cans (pack)',
     quantity: 1
   }
 ];
@@ -52,6 +51,13 @@ export const OFFERS = [
 export class OffersComponent {
   offers = OFFERS;
 
+  selectPackage(offer: any, option: string) {
+    const fullOption = offer.packageOptions.find((p: string) => p.startsWith(option));
+    if (fullOption) {
+      offer.selectedPackage = fullOption;
+    }
+  }
+
   updateQuantity(offer: any, change: number) {
     offer.quantity = Math.max(1, offer.quantity + change);
   }
@@ -59,6 +65,6 @@ export class OffersComponent {
   addToCart(offer: any) {
     console.log(`Added ${offer.quantity} ${offer.selectedPackage} of ${offer.title} to cart`);
     offer.quantity = 1;
-    offer.selectedPackage = '6 cans';
+    offer.selectedPackage = '6 cans (pack)';
   }
 }
