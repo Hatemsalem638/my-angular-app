@@ -1,15 +1,17 @@
-
 /* Featured offers section */
 .featured-offers-container {
   width: 100%;
-  padding: 4rem 0; /* More vertical padding */
-  margin: 3rem 0; /* Space between sections */
-  background: #fafafa; /* Very light background */
+  padding: 4rem 0;
+  margin: 3rem 0;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   h2 {
     text-align: center;
-    margin-bottom: 3rem; /* More space below heading */
-    font-size: 2.2rem; /* Larger heading */
+    margin-bottom: 3rem;
+    font-size: 2.2rem;
     color: #222;
     position: relative;
     padding-bottom: 1rem;
@@ -25,29 +27,29 @@
   }
 }
 
-/* Offers container - 4 columns */
-.offers-container {
+/* Offers grid container */
+.offers-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(240px, 1fr));
   justify-content: center;
-  gap: 30px; /* Increased gap between boxes */
+  gap: 30px;
   width: 100%;
-  max-width: 1400px; /* Wider container */
-  padding: 0 30px; /* More side padding */
+  max-width: 1400px;
+  padding: 0 30px;
   margin: 0 auto;
 }
 
 /* Offer box - Enhanced styling */
 .offer-box {
   border: 1px solid #eee;
-  border-radius: 12px; /* More rounded corners */
-  padding: 25px 20px; /* More padding */
+  border-radius: 12px;
+  padding: 25px 20px;
   background: white;
   box-shadow: 0 5px 15px rgba(0,0,0,0.05);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px; /* More space between elements */
+  gap: 20px;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   position: relative;
   overflow: hidden;
@@ -74,38 +76,38 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    align-items: center; /* Center vertically */
+    align-items: center;
     gap: 15px;
 
     .offer-title {
-      font-weight: 700; /* Bolder */
-      font-size: 1.25rem; /* Slightly larger */
+      font-weight: 700;
+      font-size: 1.25rem;
       color: #222;
       flex: 1;
     }
 
     .offer-price {
       color: #e53935;
-      font-weight: 800; /* Bolder */
-      font-size: 1.3rem; /* Slightly larger */
+      font-weight: 800;
+      font-size: 1.3rem;
       white-space: nowrap;
     }
   }
 
   .package-options {
     display: flex;
-    gap: 10px; /* More space between buttons */
+    gap: 10px;
     width: 100%;
     justify-content: space-between;
 
     button {
       flex: 1;
-      padding: 10px 5px; /* Taller buttons */
+      padding: 10px 5px;
       border: 1px solid #ddd;
       background: #f9f9f9;
-      border-radius: 6px; /* More rounded */
+      border-radius: 6px;
       cursor: pointer;
-      font-size: 0.9rem; /* Slightly larger text */
+      font-size: 0.9rem;
       transition: all 0.2s ease;
       min-width: 0;
 
@@ -125,16 +127,16 @@
   .quantity-controls {
     display: flex;
     align-items: center;
-    gap: 20px; /* More space */
-    margin: 10px 0; /* More vertical space */
+    gap: 20px;
+    margin: 10px 0;
 
     button {
-      width: 40px; /* Larger buttons */
+      width: 40px;
       height: 40px;
       border: 1px solid #ddd;
       background: #f9f9f9;
       border-radius: 50%;
-      font-size: 1.2rem; /* Larger text */
+      font-size: 1.2rem;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -150,8 +152,8 @@
     span {
       min-width: 30px;
       text-align: center;
-      font-weight: 700; /* Bolder */
-      font-size: 1.1rem; /* Larger */
+      font-weight: 700;
+      font-size: 1.1rem;
     }
   }
 
@@ -159,14 +161,14 @@
     background: red;
     color: white;
     border: none;
-    padding: 14px; /* Taller button */
-    border-radius: 6px; /* More rounded */
+    padding: 14px;
+    border-radius: 6px;
     width: 100%;
     cursor: pointer;
-    font-weight: 700; /* Bolder */
-    font-size: 1.1rem; /* Larger */
+    font-weight: 700;
+    font-size: 1.1rem;
     transition: all 0.3s ease;
-    margin-top: 10px; /* Space above button */
+    margin-top: 10px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 
@@ -178,136 +180,19 @@
   }
 }
 
-
-/* Responsive styles */
-@media (max-width: 1400px) {
-  .offers-container {
-    grid-template-columns: repeat(3, minmax(240px, 1fr)); /* 3 columns */
-    max-width: 1200px;
-  }
-}
-
-@media (max-width: 1100px) {
-  .offers-container {
-    gap: 25px; /* Slightly smaller gap */
-  }
-  
-  .offer-box {
-    padding: 20px 15px;
-    
-    .product-image {
-      width: 180px;
-      height: 180px;
-    }
-  }
-}
-
-@media (max-width: 900px) {
-  .offers-container {
-    grid-template-columns: repeat(2, minmax(240px, 1fr)); /* 2 columns */
-    max-width: 800px;
-  }
-  
-  .main-banner {
-    height: 450px;
-    
-    h1 {
-      font-size: 2.2rem;
-    }
-  }
-  
-  .featured-offers-container,
-  .categories-container {
-    padding: 3rem 0;
-    
-    h2 {
-      font-size: 2rem;
-    }
-  }
-}
-
-@media (max-width: 700px) {
-  .offers-container {
-    grid-template-columns: minmax(280px, 1fr); /* 1 column */
-    max-width: 500px;
-    gap: 20px;
-  }
-  
-  .main-banner {
-    height: 400px;
-    padding: 0 1rem;
-    
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    
-    p {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-    }
-  }
-  
-  .offer-box {
-    .product-image {
-      width: 160px;
-      height: 160px;
-    }
-    
-    .package-options {
-      flex-wrap: wrap;
-      
-      button {
-        min-width: calc(33% - 6px);
-      }
-    }
-  }
-  
-  .video-banner {
-    height: 400px;
-    margin: 3rem 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .main-banner {
-    height: 350px;
-    
-    h1 {
-      font-size: 1.8rem;
-    }
-    
-    .order-btn {
-      padding: 12px 24px;
-    }
-  }
-  
-  .offer-box {
-    .product-image {
-      width: 140px;
-      height: 140px;
-    }
-  }
-  
-  .categories-list {
-    gap: 20px;
-    
-    .category-circle {
-      width: 100px;
-      
-      .brand-logo {
-        width: 80px;
-        height: 80px;
-      }
-    }
-  }
+/* More offers wrapper */
+.more-offers-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+  padding: 0 30px;
 }
 
 .more-offers-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-top: 3rem;
   padding: 12px 24px;
   background: white;
   color: red;
@@ -330,5 +215,81 @@
     svg {
       transform: translateX(3px);
     }
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 1400px) {
+  .offers-grid {
+    grid-template-columns: repeat(3, minmax(240px, 1fr));
+    max-width: 1200px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .offers-grid {
+    gap: 25px;
+  }
+  
+  .offer-box {
+    padding: 20px 15px;
+    
+    .product-image {
+      width: 180px;
+      height: 180px;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .offers-grid {
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
+    max-width: 800px;
+  }
+  
+  .featured-offers-container,
+  .categories-container {
+    padding: 3rem 0;
+    
+    h2 {
+      font-size: 2rem;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .offers-grid {
+    grid-template-columns: minmax(280px, 1fr);
+    max-width: 500px;
+    gap: 20px;
+  }
+  
+  .offer-box {
+    .product-image {
+      width: 160px;
+      height: 160px;
+    }
+    
+    .package-options {
+      flex-wrap: wrap;
+      
+      button {
+        min-width: calc(33% - 6px);
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .offer-box {
+    .product-image {
+      width: 140px;
+      height: 140px;
+    }
+  }
+  
+  .more-offers-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
   }
 }

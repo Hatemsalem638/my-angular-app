@@ -78,3 +78,52 @@
   animation: shimmer 1.5s infinite;
   border-radius: 8px;
 }
+
+.more-offers-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 40px;
+
+  .more-offers-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 3rem;
+    padding: 12px 24px;
+    background: white;
+    color: red;
+    border: 2px solid red;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    
+    svg {
+      transition: transform 0.3s ease;
+    }
+
+    &:hover {
+        background: red;
+        color: white;
+        
+        svg {
+        transform: translateY(3px); 
+        }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .more-offers-wrapper {
+    padding: 0 20px;
+    
+    .more-offers-btn {
+      margin-top: 2rem;
+      padding: 10px 20px;
+    }
+  }
+}

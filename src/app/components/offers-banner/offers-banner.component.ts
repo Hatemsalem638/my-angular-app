@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-offers-banner',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule], 
   templateUrl: './offers-banner.html',
   styleUrls: ['./offers-banner.scss']
 })
