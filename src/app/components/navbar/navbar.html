@@ -16,13 +16,26 @@
 
     <div class="navbar-right">
       <div class="search-container">
-        <input type="text" placeholder="Search...">
+        <input type="text" placeholder="Search..." #searchInput>
+        <button (click)="search(searchInput.value)">Search</button>
       </div>
       <div class="nav-actions">
         <a href="#" class="language-selector">EN</a>
-        <a href="#" class="cart-icon">🛒</a>
-        <a href="#" class="login-btn">Login</a>
-        <button class="order-btn" onclick="window.location.href='/products'">Order Now</button>      
+        <a routerLink="/cart" class="cart-icon">🛒</a>
+
+        <button class="order-btn" (click)="navigateToProducts()">Order Now</button>
+
+        
+        <ng-container *ngIf="currentUser; else loginTemplate">
+          <span class="username">{{ currentUser.username }}</span>
+          <button class="logout-btn" (click)="logout()">Logout</button>
+        </ng-container>
+        
+        <ng-template #loginTemplate>
+          <button class="login-btn" (click)="openLogin()">Login</button>
+        </ng-template>
+        
+        <app-login #loginModal></app-login>
       </div>
     </div>
   </div>

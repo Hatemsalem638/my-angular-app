@@ -1,0 +1,153 @@
+<div class="modal-overlay" [class.open]="isOpen" (click)="close()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="close()">&times;</button>
+    
+    <!-- Login Form -->
+    <div *ngIf="currentForm === 'login'">
+      <h2>Login</h2>
+      
+      <form (ngSubmit)="loginWithEmail()" class="login-form">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input 
+            type="email" 
+            id="email" 
+            placeholder="Enter your email" 
+            [(ngModel)]="email"
+            name="email"
+            required
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            placeholder="Enter your password" 
+            [(ngModel)]="password"
+            name="password"
+            required
+          >
+          <a routerLink="/forgot-password" class="forgot-password">Forgot password?</a>
+        </div>
+        
+        <button type="submit" class="login-btn">Login with Email</button>
+        
+        <div class="divider">OR</div>
+        
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input 
+            type="tel" 
+            id="phone" 
+            placeholder="Enter your phone number" 
+            [(ngModel)]="phone"
+            name="phone"
+            required
+          >
+        </div>
+        
+        <button type="button" class="login-btn" (click)="sendOtp()">
+          Send OTP
+        </button>
+        
+        <div class="register-link">
+          Don't have an account? 
+          <a (click)="showRegister()">Register</a>
+        </div>
+      </form>
+    </div>
+    
+    <!-- Registration Form -->
+    <div *ngIf="currentForm === 'register'">
+      <h2>Register</h2>
+      
+      <form (ngSubmit)="register()" class="login-form">
+        <div class="form-group">
+          <label for="regUsername">Username</label>
+          <input 
+            type="text" 
+            id="regUsername" 
+            placeholder="Choose a username" 
+            [(ngModel)]="username"
+            name="regUsername"
+            required
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="regEmail">Email</label>
+          <input 
+            type="email" 
+            id="regEmail" 
+            placeholder="Enter your email" 
+            [(ngModel)]="email"
+            name="regEmail"
+            required
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="regPassword">Password</label>
+          <input 
+            type="password" 
+            id="regPassword" 
+            placeholder="Create a password" 
+            [(ngModel)]="password"
+            name="regPassword"
+            required
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input 
+            type="password" 
+            id="confirmPassword" 
+            placeholder="Confirm your password" 
+            [(ngModel)]="confirmPassword"
+            name="confirmPassword"
+            required
+          >
+        </div>
+        
+        <button type="submit" class="login-btn">Register</button>
+        
+        <div class="register-link">
+          Already have an account? 
+          <a (click)="showLogin()">Login</a>
+        </div>
+      </form>
+    </div>
+    
+    <!-- OTP Verification -->
+    <div *ngIf="currentForm === 'otp'">
+      <h2>Verify OTP</h2>
+      
+      <form (ngSubmit)="verifyOtp()" class="login-form">
+        <div class="form-group">
+          <label>Enter OTP sent to {{phone}}</label>
+          <input 
+            type="text" 
+            placeholder="Enter 6-digit OTP" 
+            [(ngModel)]="otp"
+            name="otp"
+            maxlength="6"
+            required
+          >
+        </div>
+        
+        <button type="submit" class="login-btn">Verify OTP</button>
+        
+        <button type="button" class="resend-btn" (click)="sendOtp()">
+          Resend OTP
+        </button>
+        
+        <div class="register-link">
+          <a (click)="showLogin()">Back to Login</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
