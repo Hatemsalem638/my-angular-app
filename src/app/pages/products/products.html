@@ -1,1 +1,46 @@
-<p>products works!</p>
+<div class="products-container">
+  <h2>Our Products</h2>
+  <div class="products-grid">
+    <div class="product-box" *ngFor="let product of products$ | async">
+      <img [src]="product.image" [alt]="product.title" class="product-image">
+      
+      <div class="product-info">
+        <span class="product-title">{{product.title}}</span>
+        <span class="product-price">{{getPriceDisplay(product.currentPrice)}}</span>
+      </div>
+
+      <div class="package-options">
+        <button *ngFor="let option of product.packageOptions"
+                [class.selected]="product.selectedPackage === option.name"
+                (click)="selectPackage(product, option.name)">
+          {{ getOptionDisplay(option.name) }} 
+        </button>
+      </div>
+
+      <div class="package-select">
+        <select [(ngModel)]="product.selectedPackage" 
+                (change)="calculatePrice(product)"
+                class="package-dropdown">
+          <option *ngFor="let option of product.packageOptions" [value]="option.name">
+            {{option.name}} ({{getOptionPrice(product, option)}}) 
+          </option>
+        </select>
+      </div>
+
+      <div class="quantity-and-cart">
+        <div class="quantity-controls">
+          <button (click)="updateQuantity(product, -1)">-</button>
+          <span>{{product.quantity}}</span>
+          <button (click)="updateQuantity(product, 1)">+</button>
+        </div>
+        
+        <button class="cart-button" (click)="addToCart(product)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
