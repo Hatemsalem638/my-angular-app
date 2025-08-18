@@ -89,7 +89,6 @@ export class LoginComponent {
   }
 
   verifyOtp() {
-    // Implement OTP verification logic here
     this.errorMessage = 'OTP verification not implemented in this flow';
   }
 

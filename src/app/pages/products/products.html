@@ -1,45 +1,176 @@
 <div class="products-container">
-  <h2>Our Products</h2>
-  <div class="products-grid">
-    <div class="product-box" *ngFor="let product of products$ | async">
-      <img [src]="product.image" [alt]="product.title" class="product-image">
-      
-      <div class="product-info">
-        <span class="product-title">{{product.title}}</span>
-        <span class="product-price">{{getPriceDisplay(product.currentPrice)}}</span>
-      </div>
+  <div class="filters">
 
-      <div class="package-options">
-        <button *ngFor="let option of product.packageOptions"
-                [class.selected]="product.selectedPackage === option.name"
-                (click)="selectPackage(product, option.name)">
-          {{ getOptionDisplay(option.name) }} 
-        </button>
-      </div>
+    <div class="filter-section">
+      <h3>Categories</h3>
+      <div class="categories-list">
+        <div class="category-item"
+             role="button" tabindex="0"
+             (click)="clearAllFilters()">
+          All Products
+        </div>
 
-      <div class="package-select">
-        <select [(ngModel)]="product.selectedPackage" 
-                (change)="calculatePrice(product)"
-                class="package-dropdown">
-          <option *ngFor="let option of product.packageOptions" [value]="option.name">
-            {{option.name}} ({{getOptionPrice(product, option)}}) 
-          </option>
+        <div class="category-item"
+             role="button" tabindex="0"
+             (click)="toggleType('drink')"
+             [class.active]="isTypeActive('drink')"
+             [attr.aria-pressed]="isTypeActive('drink')">
+          Beverages
+        </div>
+
+        <div class="category-item"
+             role="button" tabindex="0"
+             (click)="toggleType('snack')"
+             [class.active]="isTypeActive('snack')"
+             [attr.aria-pressed]="isTypeActive('snack')">
+          Ready Meals
+        </div>
+
+        <div class="category-item"
+             role="button" tabindex="0"
+             (click)="toggleType('drink')"
+             [class.active]="isTypeActive('drink')"
+             [attr.aria-pressed]="isTypeActive('drink')">
+          Energy Drinks
+        </div>
+
+        <div class="category-item"
+             role="button" tabindex="0"
+             (click)="toggleType('drink')"
+             [class.active]="isTypeActive('drink')"
+             [attr.aria-pressed]="isTypeActive('drink')">
+          Mineral Water
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-section">
+      <h3>Brands</h3>
+      <div class="brands-grid">
+        <div class="brand-item"
+             role="button" tabindex="0"
+             (click)="toggleBrand('coca cola')"
+             [class.active]="isBrandActive('coca cola')"
+             [attr.aria-pressed]="isBrandActive('coca cola')">
+          <img src="../../../assets/brands/coca cola.jpg" alt="coca cola">
+          <span>Coca Cola</span>
+        </div>
+
+        <div class="brand-item"
+             role="button" tabindex="0"
+             (click)="toggleBrand('KOMBIY')"
+             [class.active]="isBrandActive('KOMBIY')"
+             [attr.aria-pressed]="isBrandActive('KOMBIY')">
+          <img src="/path/to/kombiy-logo.png" alt="KOMBIY">
+          <span>KOMBIY</span>
+        </div>
+
+        <div class="brand-item"
+             role="button" tabindex="0"
+             (click)="toggleBrand('Nestle')"
+             [class.active]="isBrandActive('Nestle')"
+             [attr.aria-pressed]="isBrandActive('Nestle')">
+          <img src="/path/to/nestle-logo.png" alt="Nestle">
+          <span>Nestle</span>
+        </div>
+
+        <div class="brand-item"
+             role="button" tabindex="0"
+             (click)="toggleBrand('Pepsi')"
+             [class.active]="isBrandActive('Pepsi')"
+             [attr.aria-pressed]="isBrandActive('Pepsi')">
+          <img src="/path/to/pepsi-logo.png" alt="Pepsi">
+          <span>Pepsi</span>
+        </div>
+
+        <div class="brand-item"
+             role="button" tabindex="0"
+             (click)="toggleBrand('Almarai')"
+             [class.active]="isBrandActive('Almarai')"
+             [attr.aria-pressed]="isBrandActive('Almarai')">
+          <img src="/path/to/almarai-logo.png" alt="Almarai">
+          <span>Almarai</span>
+        </div>
+
+        <div class="brand-item"
+             role="button" tabindex="0"
+             (click)="toggleBrand('Lays')"
+             [class.active]="isBrandActive('Lays')"
+             [attr.aria-pressed]="isBrandActive('Lays')">
+          <img src="/path/to/lays-logo.png" alt="Lays">
+          <span>Lays</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-section">
+      <h3>Price Range</h3>
+      <div class="price-range">
+        <div class="price-inputs">
+          <input type="number" placeholder="Min" [(ngModel)]="priceMinInput">
+          <span>to</span>
+          <input type="number" placeholder="Max" [(ngModel)]="priceMaxInput">
+        </div>
+        <button class="apply-btn" (click)="applyPriceRange()">Apply</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="products-content">
+    <div class="products-header">
+      <h2>Our Products</h2>
+      <div class="sort-bar">
+        <label for="sortBy">Sort by:</label>
+        <select id="sortBy" [(ngModel)]="selectedSort" (change)="onSortChange(selectedSort)">
+          <option value="name-asc">Name (A–Z)</option>
+          <option value="name-desc">Name (Z–A)</option>
+          <option value="price-asc">Price (Low → High)</option>
+          <option value="price-desc">Price (High → Low)</option>
         </select>
       </div>
+    </div>
 
-      <div class="quantity-and-cart">
-        <div class="quantity-controls">
-          <button (click)="updateQuantity(product, -1)">-</button>
-          <span>{{product.quantity}}</span>
-          <button (click)="updateQuantity(product, 1)">+</button>
+    <div class="products-grid">
+      <div class="product-box" *ngFor="let product of products$ | async">
+        <img [src]="product.image" [alt]="product.title" class="product-image">
+
+        <div class="product-info">
+          <span class="product-title">{{ product.title }}</span>
+          <span class="product-price">{{ getPriceDisplay(product.currentPrice) }}</span>
         </div>
-        
-        <button class="cart-button" (click)="addToCart(product)">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
-          </svg>
-        </button>
+
+        <div class="package-options">
+          <button *ngFor="let option of product.packageOptions"
+                  [class.selected]="product.selectedPackage === option.name"
+                  (click)="selectPackage(product, option.name)">
+            {{ getOptionDisplay(option.name) }}
+          </button>
+        </div>
+
+        <div class="package-select">
+          <select [(ngModel)]="product.selectedPackage"
+                  (change)="product.currentPrice = calculatePrice(product)"
+                  class="package-dropdown">
+            <option *ngFor="let option of product.packageOptions" [value]="option.name">
+              {{ option.name }} ({{ getOptionPrice(product, option) }})
+            </option>
+          </select>
+        </div>
+
+        <div class="quantity-and-cart">
+          <div class="quantity-controls">
+            <button (click)="updateQuantity(product, -1)">-</button>
+            <span>{{ product.quantity }}</span>
+            <button (click)="updateQuantity(product, 1)">+</button>
+          </div>
+
+          <button class="cart-button" (click)="addToCart(product)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </div>

@@ -1,0 +1,115 @@
+.footer {
+  background-color: #072c48;
+  color: #fff;
+  padding: 3rem 1rem;
+  font-family: Arial, sans-serif;
+
+  .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+    gap: 2rem;
+
+    .footer-section {
+      flex: 1;
+      min-width: 200px;
+
+      h4 {
+        margin-bottom: 1.5rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+
+      p, a {
+        color: #fff;
+        opacity: 0.8;
+        text-decoration: none;
+        transition: opacity 0.2s;
+        margin-bottom: 0.5rem;
+        display: block;
+      }
+
+      a:hover {
+        opacity: 1;
+        text-decoration: underline;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          margin-bottom: 0.75rem;
+        }
+      }
+
+      .download-buttons {
+        display: flex;
+        gap: 0.8rem; 
+        flex-wrap: wrap;
+
+        img {
+          max-width: 75px; 
+          height: auto;
+          transition: transform 0.2s ease;
+
+          &:hover {
+            transform: scale(1.05);
+          }
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size: 0.9rem;
+
+    .branding {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .pepsi-logo {
+        height: 28px;
+        width: auto;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 2rem 1rem;
+
+    .footer-content {
+      flex-direction: column;
+      gap: 2rem;
+
+      .footer-section {
+        .download-buttons {
+          justify-content: flex-start; 
+          
+          img {
+            max-width: 90px; 
+          }
+        }
+      }
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+  }
+}

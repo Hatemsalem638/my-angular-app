@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
 import { AuthService } from '../../../environments/auth.service';
+import { SearchBarComponent } from '../searchbar/searchbar.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterModule, LoginComponent],
+  imports: [CommonModule, RouterModule, LoginComponent, SearchBarComponent],
   templateUrl: './navbar.html',
   styleUrls: ['./navbar.scss']
 })
@@ -21,6 +22,7 @@ export class NavbarComponent {
   constructor(private router: Router, private authService: AuthService) {
     this.authService.currentUser$.subscribe(user => {
       this.currentUser = user;
+      
     });
   }
 
@@ -40,11 +42,10 @@ export class NavbarComponent {
     this.authService.logout();
   }
 
-  search(query: string) {
-    if (query && query.trim()) {
-      console.log('Searching for:', query);
-      this.router.navigate(['/search'], { queryParams: { q: query } });
-      this.searchInput.nativeElement.value = '';
+  onSearch(searchTerm: string) {
+    const q = (searchTerm || '').trim();
+    if (q.length >= 3) {
+      this.router.navigate(['/products'], { queryParams: { q } });
     }
   }
 }

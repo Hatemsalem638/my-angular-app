@@ -15,10 +15,10 @@
     </div>
 
     <div class="navbar-right">
-      <div class="search-container">
-        <input type="text" placeholder="Search..." #searchInput>
-        <button (click)="search(searchInput.value)">Search</button>
-      </div>
+      <app-search-bar 
+        (searchTriggered)="onSearch($event)"
+        class="search-container">
+      </app-search-bar>
       <div class="nav-actions">
         <a href="#" class="language-selector">EN</a>
         <a routerLink="/cart" class="cart-icon">🛒</a>

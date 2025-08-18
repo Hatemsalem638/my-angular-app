@@ -2,7 +2,6 @@
   <div class="modal-content" (click)="$event.stopPropagation()">
     <button class="close-btn" (click)="close()">&times;</button>
     
-    <!-- Login Form -->
     <div *ngIf="currentForm === 'login'">
       <h2>Login</h2>
       
@@ -59,7 +58,6 @@
       </form>
     </div>
     
-    <!-- Registration Form -->
     <div *ngIf="currentForm === 'register'">
       <h2>Register</h2>
       
@@ -121,7 +119,6 @@
       </form>
     </div>
     
-    <!-- OTP Verification -->
     <div *ngIf="currentForm === 'otp'">
       <h2>Verify OTP</h2>
       

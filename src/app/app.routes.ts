@@ -19,5 +19,6 @@ export const routes: Routes = [
     component: OffersComponent,
     title: 'Special Offers' 
   },
+  
   { path: '**', redirectTo: '' } 
 ];

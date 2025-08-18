@@ -1,0 +1,23 @@
+
+<div class="vid2-banner">
+  <video
+    class="vid2-banner__video"
+    [attr.src]="src || null"
+    [attr.poster]="poster || null"
+    [attr.autoplay]="autoplay ? true : null"
+    [attr.loop]="loop ? true : null"
+    [attr.muted]="muted ? true : null"
+    playsinline
+    preload="auto"
+  >
+    Your browser does not support the HTML5 Video element.
+  </video>
+
+  <div class="vid2-banner__overlay"></div>
+
+  <div class="vid2-banner__content" role="region" aria-label="Video banner content">
+    <h1 *ngIf="title" class="vid2-banner__title">{{ title }}</h1>
+    <p *ngIf="subtitle" class="vid2-banner__subtitle">{{ subtitle }}</p>
+    <ng-content></ng-content>
+  </div>
+</div>

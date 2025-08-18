@@ -7,6 +7,9 @@ import { MainBannerComponent } from '../../components/main-banner/main-banner.co
 import { CategoriesComponent } from '../../components/categories/categories.component';
 import { VideoBannerComponent } from '../../components/video-banner/video-banner.component';
 import { OffersBannerComponent } from '../../components/offers-banner/offers-banner.component';
+import { Vid2BannerComponent } from '../../components/vid2-banner/vid2-banner.component';
+import { FooterBannerComponent } from '../../components/footer-banner/footer-banner.component';
+
 
 interface Offer {
   id: number;
@@ -29,7 +32,9 @@ interface Offer {
     CategoriesComponent,
     VideoBannerComponent,
     OffersComponent,
-    OffersBannerComponent
+    OffersBannerComponent,
+    Vid2BannerComponent,
+    FooterBannerComponent
   ],
   templateUrl: './home.html',
   styleUrls: ['./home.scss']

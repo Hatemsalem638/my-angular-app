@@ -3,7 +3,6 @@ const admin = require('firebase-admin');
 const cors = require('cors');
 const app = express();
 
-// Initialize Firebase Admin SDK
 const serviceAccount = require('./serviceAccountKey.json');
 
 admin.initializeApp({
@@ -11,35 +10,29 @@ admin.initializeApp({
   databaseURL: 'https://angular-projecr-fef74-default-rtdb.firebaseio.com'
 });
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Email/Password Registration
 app.post('/register', async (req, res) => {
   try {
     const { email, password, username } = req.body;
     
-    // Validate input
     if (!email || !password || !username) {
       return res.status(400).send({ error: 'Email, password, and username are required' });
     }
 
-    // Create Firebase user
     const userRecord = await admin.auth().createUser({
       email,
       password,
       displayName: username
     });
     
-    // Save additional user data to Firestore
     await admin.firestore().collection('users').doc(userRecord.uid).set({
       username,
       email,
       createdAt: admin.firestore.FieldValue.serverTimestamp()
     });
     
-    // Generate custom token
     const token = await admin.auth().createCustomToken(userRecord.uid);
     
     res.status(201).send({ 
@@ -68,7 +61,6 @@ app.post('/register', async (req, res) => {
   }
 });
 
-// Email/Password Login
 app.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -77,15 +69,11 @@ app.post('/login', async (req, res) => {
       return res.status(400).send({ error: 'Email and password are required' });
     }
 
-    // Verify user exists
     const user = await admin.auth().getUserByEmail(email);
     
-    // Verify password (this is a simplified approach - in production, use Firebase Auth)
-    // Note: In a real app, you'd use Firebase Auth's signInWithEmailAndPassword
-    // This is just for demonstration with your current frontend flow
+    
     const token = await admin.auth().createCustomToken(user.uid);
     
-    // Get user data from Firestore
     const userDoc = await admin.firestore().collection('users').doc(user.uid).get();
     const userData = userDoc.data();
     
@@ -112,22 +100,18 @@ app.post('/login', async (req, res) => {
   }
 });
 
-// Phone Authentication Initiation
 app.post('/initiate-phone-auth', async (req, res) => {
   try {
     const { phone } = req.body;
     
-    // Validate phone number format
     if (!phone || !phone.startsWith('+')) {
       return res.status(400).send({ error: 'Invalid phone number format. Include country code (+XX)' });
     }
 
-    // Check if user exists
     let userRecord;
     try {
       userRecord = await admin.auth().getUserByPhoneNumber(phone);
       
-      // User exists - generate token
       const token = await admin.auth().createCustomToken(userRecord.uid);
       const userDoc = await admin.firestore().collection('users').doc(userRecord.uid).get();
       const userData = userDoc.data();
@@ -141,7 +125,6 @@ app.post('/initiate-phone-auth', async (req, res) => {
       });
     } catch (error) {
       if (error.code === 'auth/user-not-found') {
-        // User doesn't exist - proceed with registration
         return res.status(200).send({
           exists: false,
           phone,
@@ -158,7 +141,6 @@ app.post('/initiate-phone-auth', async (req, res) => {
   }
 });
 
-// Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Authentication server running on port ${PORT}`);
