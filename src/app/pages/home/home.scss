@@ -221,46 +221,51 @@ $white: #ffffff;
   margin-top: 2rem;
 }
 
-.more-offers-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  background: $white;
-  color: $primary;
-  border: 1px solid $primary;
-  border-radius: 4px;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  @include body-1;
-  font-weight: 600;
+.more-offers-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 40px;
 
-  &:hover {
-    background: $primary-light;
-    color: $white;
-    border-color: $primary-light;
-
+  .more-offers-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 3rem;
+    padding: 12px 24px;
+    background: white;
+    color: red;
+    border: 2px solid red;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    
     svg {
-      stroke: $white;
+      transition: transform 0.3s ease;
     }
-  }
 
-  svg {
-    stroke: $primary;
-    transition: stroke 0.2s ease;
+    &:hover {
+        background: red;
+        color: white;
+        
+        svg {
+        transform: translateY(3px); 
+        }
+    }
   }
 }
 
-@include for-phone-only {
-  .offers-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .package-options {
-    flex-wrap: wrap;
-
-    button {
-      flex: 0 0 calc(50% - 0.25rem);
+@media (max-width: 768px) {
+  .more-offers-wrapper {
+    padding: 0 20px;
+    
+    .more-offers-btn {
+      margin-top: 2rem;
+      padding: 10px 20px;
     }
   }
 }

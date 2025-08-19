@@ -1,1 +1,185 @@
-<p>cart works!</p>
+<div class="checkout-page">
+  <!-- ============= LEFT: Address / Delivery / Payment ============= -->
+  <aside class="checkout-side">
+    <!-- Delivery Address -->
+    <section class="panel">
+      <header class="panel-header">
+        <h3>Delivery Address</h3>
+        <button class="link-btn" type="button">+ Add New Address</button>
+      </header>
+
+      <div class="address-list">
+        <label
+          class="address-card"
+          *ngFor="let addr of addresses"
+          [class.active]="addr.id === selectedAddressId">
+          <input
+            type="radio"
+            name="address"
+            [value]="addr.id"
+            [(ngModel)]="selectedAddressId"
+          />
+          <div class="addr-body">
+            <div class="addr-title">
+              <span>{{ addr.title }}</span>
+              <span *ngIf="addr.isDefault" class="badge">Default</span>
+            </div>
+            <div class="addr-lines">
+              <div>{{ addr.line1 }}</div>
+              <div *ngIf="addr.line2">{{ addr.line2 }}</div>
+              <div *ngIf="addr.city || addr.country">{{ addr.city }}, {{ addr.country }}</div>
+              <div *ngIf="addr.phone">Phone: {{ addr.phone }}</div>
+            </div>
+          </div>
+        </label>
+      </div>
+    </section>
+
+    <!-- Delivery Time -->
+    <section class="panel">
+      <h3 class="panel-title">Delivery Time</h3>
+
+      <label class="option-line">
+        <input type="radio" name="delivery" value="standard"
+               [checked]="deliveryOption==='standard'"
+               (change)="setDelivery('standard')" />
+        <div class="option-body">
+          <div class="option-head">
+            <span class="opt-title">Standard Delivery</span>
+            <span class="opt-price">Free</span>
+          </div>
+          <p class="opt-desc">Reliable delivery within the standard time window.</p>
+        </div>
+      </label>
+
+      <label class="option-line">
+        <input type="radio" name="delivery" value="express"
+               [checked]="deliveryOption==='express'"
+               (change)="setDelivery('express')" />
+        <div class="option-body">
+          <div class="option-head">
+            <span class="opt-title">Express Delivery</span>
+            <span class="opt-price">+ 50 EGP</span>
+          </div>
+          <p class="opt-desc">Faster delivery for urgent orders.</p>
+        </div>
+      </label>
+
+      <label class="option-line">
+        <input type="radio" name="delivery" value="scheduled"
+               [checked]="deliveryOption==='scheduled'"
+               (change)="setDelivery('scheduled')" />
+        <div class="option-body">
+          <div class="option-head">
+            <span class="opt-title">Schedule for Later</span>
+            <span class="opt-price">Free</span>
+          </div>
+          <p class="opt-desc">Choose the best time for your delivery.</p>
+        </div>
+      </label>
+
+      <div class="schedule-row" *ngIf="deliveryOption==='scheduled'">
+        <input type="date" [(ngModel)]="scheduleDate" />
+        <input type="time" [(ngModel)]="scheduleTime" />
+      </div>
+    </section>
+
+    <!-- Payment Method -->
+    <section class="panel">
+      <h3 class="panel-title">Payment Method</h3>
+
+      <label class="option-line">
+        <input type="radio" name="payment" value="cod"
+               [checked]="paymentMethod==='cod'"
+               (change)="setPayment('cod')" />
+        <div class="option-body">
+          <div class="option-head">
+            <span class="opt-title">Cash on Delivery</span>
+          </div>
+          <p class="opt-desc">Pay in cash when your order arrives.</p>
+        </div>
+      </label>
+
+      <label class="option-line">
+        <input type="radio" name="payment" value="card"
+               [checked]="paymentMethod==='card'"
+               (change)="setPayment('card')" />
+        <div class="option-body">
+          <div class="option-head">
+            <span class="opt-title">Credit / Debit Card</span>
+          </div>
+          <p class="opt-desc">Secure online payment (Visa, MasterCard).</p>
+        </div>
+      </label>
+
+      <label class="option-line">
+        <input type="radio" name="payment" value="wallet"
+               [checked]="paymentMethod==='wallet'"
+               (change)="setPayment('wallet')" />
+        <div class="option-body">
+          <div class="option-head">
+            <span class="opt-title">Wallet</span>
+          </div>
+          <p class="opt-desc">Pay using your digital wallet.</p>
+        </div>
+      </label>
+    </section>
+  </aside>
+
+  <!-- ============= RIGHT: Cart Items / Summary ============= -->
+  <section class="cart-container">
+    <h2>Your Cart</h2>
+
+    <ng-container *ngIf="cart$ | async as cart; else loading">
+      <div *ngIf="cart.length === 0" class="empty-cart">
+        🛒 Your cart is empty.
+      </div>
+
+      <div *ngFor="let item of cart; trackBy: trackByKey" class="cart-item">
+        <img [src]="item.image" [alt]="item.name" class="cart-img" />
+
+        <div class="cart-details">
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.pack }}</p>
+          <p class="price">{{ item.price | currency:'EGP' }}</p>
+
+          <div class="quantity-controls">
+            <button (click)="decreaseQty(item)">-</button>
+            <span>{{ item.quantity }}</span>
+            <button (click)="increaseQty(item)">+</button>
+          </div>
+        </div>
+
+        <div class="cart-actions">
+          <button class="remove-btn" (click)="removeItem(item)">🗑</button>
+        </div>
+      </div>
+
+      <div class="cart-summary" *ngIf="cart.length > 0">
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <strong>{{ subtotal$ | async | currency:'EGP' }}</strong>
+        </div>
+        <div class="summary-row">
+          <span>Shipping</span>
+          <strong>
+            {{
+              (deliveryOption==='express' ? 50 : 0)
+              | currency:'EGP'
+            }}
+          </strong>
+        </div>
+        <div class="summary-row total">
+          <span>Total</span>
+          <strong>{{ grandTotal$ | async | currency:'EGP' }}</strong>
+        </div>
+
+        <button class="checkout-btn" (click)="placeOrder()">Place Order</button>
+      </div>
+    </ng-container>
+
+    <ng-template #loading>
+      <div class="empty-cart">Loading…</div>
+    </ng-template>
+  </section>
+</div>

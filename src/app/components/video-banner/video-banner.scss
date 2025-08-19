@@ -2,7 +2,7 @@
   display: flex;
   gap: 15px;
   width: 100%;
-  padding: 0;
+  padding: 0 10px;
   margin: 20px 0;
 
   .video-banner {
@@ -40,6 +40,7 @@
     flex-direction: column;
     align-items: center;
     gap: 15px;
+    padding: 0 10px;
 
     .video-banner {
       height: 300px;

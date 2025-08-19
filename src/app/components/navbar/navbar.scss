@@ -23,7 +23,7 @@
     .logo {
       height: 70px;
       width: auto;
-      max-width: 150px; // Add max-width constraint
+      max-width: 150px; 
       margin-right: 1rem;
     }
   }
@@ -83,7 +83,8 @@
 
     .search-container {
       position: relative;
-      width: 300px;
+      width: 200px;
+      padding: 0 20px;
 
       input {
         padding: 0.5rem 1rem 0.5rem 2rem;
@@ -99,7 +100,6 @@
       }
 
       &::before {
-        content: '🔍';
         position: absolute;
         left: 0.75rem;
         top: 50%;
@@ -192,6 +192,7 @@
     flex-direction: column;
     padding: 1rem;
     gap: 1rem;
+    
 
     .navbar-left, .navbar-right {
       width: 100%;
@@ -291,4 +292,65 @@
     background-color: #f5f5f5;
     border-color: #ccc;
   }
+}
+
+.search-bar {
+  position: relative;
+
+  &::before,
+  &::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  /* if an icon element exists in HTML/CSS from before */
+  .search-icon,
+  i,
+  svg {
+    display: none !important;
+  }
+
+  input {
+    background-image: none !important; /* kills CSS bg icon */
+    background-repeat: no-repeat;
+    padding-left: 12px;  /* make sure text is not cramped on the left */
+  }
+}
+
+/* Cart badge counter */
+.cart-link {
+  position: relative;
+  display: inline-block;
+
+  .cart-icon {
+    font-size: 1.2rem; /* keep whatever you used */
+    line-height: 1;
+    display: inline-block;
+  }
+}
+
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #e63946;   /* same red used in your site */
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,.2);
+}
+
+.cart-badge.hidden {
+  display: none;
+}
+
+/* if the nav stacks on mobile, keep badge positioned nicely */
+@media (max-width: 768px) {
+  .cart-badge { top: -5px; right: -6px; }
 }

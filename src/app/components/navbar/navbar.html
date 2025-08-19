@@ -21,7 +21,11 @@
       </app-search-bar>
       <div class="nav-actions">
         <a href="#" class="language-selector">EN</a>
-        <a routerLink="/cart" class="cart-icon">🛒</a>
+        <a class="cart-link" routerLink="/cart" aria-label="Cart">
+          <span class="cart-icon">🛒</span>
+          <span class="cart-badge" *ngIf="(count$ | async) as c" [class.hidden]="!c">{{ c }}</span>
+        </a>
+
 
         <button class="order-btn" (click)="navigateToProducts()">Order Now</button>
 

@@ -1,6 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CartService } from '../../../services/cart.service';
+
 import {
   Firestore,
   collection,
@@ -58,6 +60,7 @@ type SortDir = 'asc' | 'desc';
 export class ProductsComponent implements OnInit {
   private firestore: Firestore = inject(Firestore);
   private route: ActivatedRoute = inject(ActivatedRoute);
+  private cartService = inject(CartService);
 
   products$!: Observable<Product[]>;
   isLoading = true;
@@ -342,11 +345,15 @@ export class ProductsComponent implements OnInit {
   }
 
   addToCart(product: Product): void {
-    const cartItem = {
-      ...product,
-      totalPrice: product.currentPrice * product.quantity,
-      selectedPackageDetails: product.packageOptions.find(opt => opt.name === product.selectedPackage)
-    };
-    console.log('Added to cart:', cartItem);
-  }
+  const item = {
+    id: product.id,
+    name: product.title,
+    price: product.currentPrice ?? this.calculatePrice(product),
+    quantity: product.quantity ?? 1,
+    pack: product.selectedPackage ?? 'Default',
+    image: product.image
+  };
+  this.cartService.addItem(item);
+}
+
 }
